@@ -3,7 +3,7 @@
   "variables": {},
   "builders": [
     {
-      "ami_description": "AWS Native Chef Stack OS 5.1.0",
+      "ami_description": "AWS Native Chef Stack OS 5.1.1",
       "ami_groups": [
         "all"
       ],
