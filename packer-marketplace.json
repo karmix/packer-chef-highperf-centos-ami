@@ -46,7 +46,11 @@
       },
       "ssh_pty": true,
       "ssh_username": "centos",
-      "tags": {},
+      "tags": {
+        "X-Contact": "tcate@chef.io",
+        "X-Dept": "SCE",
+        "X-Production": true
+      },
       "type": "amazon-ebs"
     }
   ],
