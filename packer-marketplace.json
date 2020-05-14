@@ -51,6 +51,11 @@
         "X-Dept": "SCE",
         "X-Production": true
       },
+      "run_tags": {
+        "X-Contact": "tcate@chef.io",
+        "X-Dept": "SCE",
+        "X-Production": false
+      },
       "type": "amazon-ebs"
     }
   ],
