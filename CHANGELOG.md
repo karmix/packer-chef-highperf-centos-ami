@@ -1,5 +1,58 @@
 
 ## Previous AMIs
+
+Published on 2020/04/21:
+
+```
+ap-northeast-1: ami-039176e6d6ff2ce53
+ap-northeast-2: ami-040b51960b42a9ae7
+ap-south-1: ami-068e104dfc81e21ed
+ap-southeast-1: ami-02d855c40c1b57453
+ap-southeast-2: ami-0a77b2aebbea2f130
+ca-central-1: ami-0388f5ac42716fba4
+eu-central-1: ami-039aef8fbfa1446c7
+eu-north-1: ami-0b7fbf4e46e9996ea
+eu-west-1: ami-0e41ecd9e5ddddfd5
+eu-west-2: ami-0d77212bfb8d309ae
+eu-west-3: ami-0cc8f93d4c1d25a78
+sa-east-1: ami-03947a94185a30029
+us-east-1: ami-0265357e9a3152543
+us-east-2: ami-0a657a17ea3dd0250
+us-west-1: ami-02737aa800421c21e
+us-west-2: ami-028cc18b3ac7c5dcc
+```
+
+Changelog:
+* Chef Workstation 0.17.5 / Puppet Agent 6.14.0 / Amazon SSM Agent 2.3.978.0
+* Docker 19.03.8-3.el7
+
+Published on 2019/10/07:
+
+```
+ap-northeast-1: ami-0943c71779148970f
+ap-northeast-2: ami-042714c24ecf25e26
+ap-south-1: ami-08cbb4e76dfee765f
+ap-southeast-1: ami-0f65ac71a3f129066
+ap-southeast-2: ami-0ff11e1be125ada2f
+ca-central-1: ami-0904037074b287caa
+eu-central-1: ami-0901dc2ff46fd73a2
+eu-north-1: ami-0f3c9a76407b25f84
+eu-west-1: ami-0581e1d8ead15c893
+eu-west-2: ami-0f415b06e749438de
+eu-west-3: ami-07eba3d943b8c05cd
+sa-east-1: ami-0bd26fc35cde37dca
+us-east-1: ami-02ddb83ff84ca592a
+us-east-2: ami-04e2458136bbbbaec
+us-west-1: ami-03ec171be9ffd4bdd
+us-west-2: ami-0d280b33e51a94243
+```
+
+Changelog:
+* CentOS 7.7 (kernel 3.10.0-1062.1.2.el7)
+* Switch on [Retpoline Spectre V2 mitigation to regain lost performance](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/7.7_release_notes/new_features#enhancement_kernel)
+* Chef Workstation 0.9.42 / Puppet Agent 6.10.0 / Amazon SSM Agent 2.3.714.0
+* Docker 19.03.2-3.el7
+
 Published on 2019/06/20:
 
 ```

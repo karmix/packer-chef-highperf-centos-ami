@@ -1,11 +1,11 @@
 #!/bin/bash -x
 set -o errexit -o nounset -o pipefail
 
-VER_MARKETPLACE=5.1.0
-VER_CHEFSERVER=13.1.8
+VER_MARKETPLACE=5.2.0
+VER_CHEFSERVER=13.2.0
 VER_MANAGE=2.5.16
 VER_PJS=2.2.8
-VER_SUPERMARKET=3.3.7
+VER_SUPERMARKET=3.3.20
 
 DL_BASEURL="https://packages.chef.io/files"
 DL_CHANNEL="stable"
@@ -21,9 +21,7 @@ curl -s -OL https://aws-native-chef-server.s3.amazonaws.com/${VER_MARKETPLACE}/f
 chmod +x main.sh
 
 echo ">>> Downloading and caching packages"
-# Temporarily switch chef-server to current
-#curl -s -OL ${DL_BASEURL}/${DL_CHANNEL}/chef-server/${VER_CHEFSERVER}/el/7/chef-server-core-${VER_CHEFSERVER}-1.el7.x86_64.rpm
-curl -s -OL ${DL_BASEURL}/current/chef-server/${VER_CHEFSERVER}/el/7/chef-server-core-${VER_CHEFSERVER}-1.el7.x86_64.rpm
+curl -s -OL ${DL_BASEURL}/${DL_CHANNEL}/chef-server/${VER_CHEFSERVER}/el/7/chef-server-core-${VER_CHEFSERVER}-1.el7.x86_64.rpm
 ln -s chef-server-core-${VER_CHEFSERVER}-1.el7.x86_64.rpm chef-server-core.rpm
 
 curl -s -OL ${DL_BASEURL}/${DL_CHANNEL}/chef-manage/${VER_MANAGE}/el/7/chef-manage-${VER_MANAGE}-1.el7.x86_64.rpm

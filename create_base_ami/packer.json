@@ -8,16 +8,32 @@
                 "us-west-2"
             ],
             "ami_name": "centos-7-minimal-install-{{isotime \"200601021504\"}}",
-            "ami_description": "Clean-room CentOS 7 minimal installation  https://github.com/irvingpop/packer-chef-highperf-centos7-ami",
+            "ami_description": "Clean-room CentOS 7 minimal installation  https://github.com/chef-customers/packer-chef-highperf-centos7-ami",
             "ssh_username": "centos",
             "tags": {
               "X-Contact": "tcate@chef.io",
               "X-Dept": "SCE",
               "X-Production": true
             },
+            "run_tags": {
+              "X-Contact": "tcate@chef.io",
+              "X-Dept": "SCE",
+              "X-Production": false
+            },
             "instance_type": "t3.large",
             "ssh_pty": "true",
-            "source_ami": "ami-02eac2c0129f6376b",
+            "source_ami_filter": {
+              "filters": {
+                "product-code": "aw0evgkw8e5c1q413zgy5pjce",
+                "virtualization-type": "hvm",
+                "name": "CentOS Linux 7 x86_64 HVM EBS ENA 2002*",
+                "root-device-type": "ebs"
+              },
+              "owners": [
+                "aws-marketplace"
+              ],
+              "most_recent": true
+            },
             "ami_virtualization_type": "hvm",
             "ebs_optimized": true,
             "ena_support": true,
