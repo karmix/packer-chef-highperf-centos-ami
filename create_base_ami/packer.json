@@ -24,13 +24,12 @@
             "ssh_pty": "true",
             "source_ami_filter": {
               "filters": {
-                "product-code": "aw0evgkw8e5c1q413zgy5pjce",
                 "virtualization-type": "hvm",
-                "name": "CentOS Linux 7 x86_64 HVM EBS ENA 2002*",
+                "name": "CentOS 7.* x86_64",
                 "root-device-type": "ebs"
               },
               "owners": [
-                "aws-marketplace"
+                "125523088429"
               ],
               "most_recent": true
             },
