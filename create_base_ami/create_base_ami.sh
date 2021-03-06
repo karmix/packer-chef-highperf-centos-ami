@@ -44,7 +44,11 @@ parted -s "$DEVICE" -- \
   set 1 boot on
 
 # Wait for device partition creation which happens asynchronously
-while [ ! -e "$PARTITION" ]; do sleep 1; done
+for ((ii=0;ii<60;++ii)) ; do
+  test -e "$PARTITION" && break
+  sleep 1
+done
+udevadm settle
 
 mkfs.xfs -f -L root "$PARTITION"
 mkdir -p "$ROOTFS"
