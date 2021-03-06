@@ -106,6 +106,8 @@ GRUB_CMDLINE_LINUX="console=tty0 crashkernel=auto console=ttyS0,115200"
 GRUB_DISABLE_RECOVERY="true"
 END
 
+yum --installroot="$ROOTFS" --nogpgcheck -y install kernel
+
 chroot "$ROOTFS" grub2-mkconfig -o /boot/grub2/grub.cfg
 chroot "$ROOTFS" grub2-install "$DEVICE"
 chroot "$ROOTFS" yum --nogpgcheck -y install cloud-init cloud-utils-growpart
