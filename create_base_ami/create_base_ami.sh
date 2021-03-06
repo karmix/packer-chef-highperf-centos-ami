@@ -55,9 +55,7 @@ mkdir -p "$ROOTFS"
 mount "$PARTITION" "$ROOTFS"
 
 rpm --root="$ROOTFS" --initdb
-rpm --root="$ROOTFS" --nodeps -ivh \
-  https://mirrors.edge.kernel.org/centos/7.8.2003/os/x86_64/Packages/centos-release-7-8.2003.0.el7.centos.x86_64.rpm
-yum --installroot="$ROOTFS" --nogpgcheck -y update
+yum --installroot="$ROOTFS" --nogpgcheck -y --releasever=/ install centos-release
 yum --installroot="$ROOTFS" --nogpgcheck -y groupinstall "Minimal Install" \
   --exclude="iwl*firmware" \
   --exclude="NetworkManager*" \
