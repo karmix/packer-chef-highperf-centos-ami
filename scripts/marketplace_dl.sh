@@ -1,14 +1,29 @@
 #!/bin/bash -x
 set -o errexit -o nounset -o pipefail
 
-VER_MARKETPLACE=5.2.0
-VER_CHEFSERVER=13.2.0
-VER_MANAGE=2.5.16
-VER_PJS=2.2.8
-VER_SUPERMARKET=3.3.20
-
+# Construct URLs from environment variables passed by packer.
 DL_BASEURL="https://packages.chef.io/files"
 DL_CHANNEL="stable"
+
+if [ "${URL_CHEFSERVER:+set}" != set ] ; then
+  URL_CHEFSERVER=${DL_BASEURL}/${DL_CHANNEL}/chef-server/${VER_CHEFSERVER}/el/7/chef-server-core-${VER_CHEFSERVER}-1.el7.x86_64.rpm
+fi
+
+if [ "${URL_MANAGE:+set}" != set ] ; then
+  URL_MANAGE=${DL_BASEURL}/${DL_CHANNEL}/chef-manage/${VER_MANAGE}/el/7/chef-manage-${VER_MANAGE}-1.el7.x86_64.rpm
+fi
+
+if [ "${URL_PJS:+set}" != set ] ; then
+  URL_PJS=${DL_BASEURL}/${DL_CHANNEL}/opscode-push-jobs-server/${VER_PJS}/el/7/opscode-push-jobs-server-${VER_PJS}-1.el7.x86_64.rpm
+fi
+
+if [ "${URL_SUPERMARKET:+set}" != set ] ; then
+  URL_SUPERMARKET=${DL_BASEURL}/${DL_CHANNEL}/supermarket/${VER_SUPERMARKET}/el/7/supermarket-${VER_SUPERMARKET}-1.el7.x86_64.rpm
+fi
+
+if [ "${URL_AUTOMATE:+set}" != set ] ; then
+  URL_AUTOMATE=https://packages.chef.io/files/current/automate/latest/chef-automate_linux_amd64.zip
+fi
 
 mkdir -p /var/cache/marketplace
 pushd /var/cache/marketplace
@@ -21,19 +36,19 @@ curl -s -OL https://aws-native-chef-server.s3.amazonaws.com/${VER_MARKETPLACE}/f
 chmod +x main.sh
 
 echo ">>> Downloading and caching packages"
-curl -s -OL ${DL_BASEURL}/${DL_CHANNEL}/chef-server/${VER_CHEFSERVER}/el/7/chef-server-core-${VER_CHEFSERVER}-1.el7.x86_64.rpm
-ln -s chef-server-core-${VER_CHEFSERVER}-1.el7.x86_64.rpm chef-server-core.rpm
+curl -s -OL "$URL_CHEFSERVER"
+ln -s "${URL_CHEFSERVER##*/}" chef-server-core.rpm
 
-curl -s -OL ${DL_BASEURL}/${DL_CHANNEL}/chef-manage/${VER_MANAGE}/el/7/chef-manage-${VER_MANAGE}-1.el7.x86_64.rpm
-ln -s chef-manage-${VER_MANAGE}-1.el7.x86_64.rpm chef-manage.rpm
+curl -s -OL "$URL_MANAGE"
+ln -s "${URL_MANAGE##*/}" chef-manage.rpm
 
-curl -s -OL ${DL_BASEURL}/${DL_CHANNEL}/opscode-push-jobs-server/${VER_PJS}/el/7/opscode-push-jobs-server-${VER_PJS}-1.el7.x86_64.rpm
-ln -s opscode-push-jobs-server-${VER_PJS}-1.el7.x86_64.rpm push-jobs-server.rpm
+curl -s -OL "$URL_PJS"
+ln -s "${URL_PJS##*/}" push-jobs-server.rpm
 
-curl -s -OL ${DL_BASEURL}/${DL_CHANNEL}/supermarket/${VER_SUPERMARKET}/el/7/supermarket-${VER_SUPERMARKET}-1.el7.x86_64.rpm
-ln -s supermarket-${VER_SUPERMARKET}-1.el7.x86_64.rpm supermarket.rpm
+curl -s -OL "$URL_SUPERMARKET"
+ln -s "${URL_SUPERMARKET##*/}" supermarket.rpm
 
-curl -s https://packages.chef.io/files/current/automate/latest/chef-automate_linux_amd64.zip | gunzip - > chef-automate && chmod +x chef-automate
+curl -s "$URL_AUTOMATE" | gunzip - > chef-automate && chmod +x chef-automate
 ./chef-automate airgap bundle create chef-automate.bundle
 
 echo ">>> Installing nightly snapshot script"
