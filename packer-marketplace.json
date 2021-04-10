@@ -3,10 +3,10 @@
   "variables": {
     "marketplace_version": "5.2.0",
 
-    "chef_server_version": "13.2.0",
-    "chef_manage_version": "2.5.16",
+    "chef_server_version": "14.2.2",
+    "chef_manage_version": "3.0.11",
     "push_jobs_version": "2.2.8",
-    "supermarket_version": "3.3.20",
+    "supermarket_version": "3.4.1",
 
     "chef_server_url": "",
     "chef_manage_url": "",
