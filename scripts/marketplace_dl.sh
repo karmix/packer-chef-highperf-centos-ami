@@ -31,9 +31,9 @@ pushd /var/cache/marketplace
 echo ">>> Writing out a timestamp"
 echo "This package cache was generated for AWS Native Chef Stack marketplace ${VER_MARKETPLACE} on $(date)" > TIMESTAMP
 
-echo ">>> Downloading and caching install scripts"
-curl -s -OL https://aws-native-chef-server.s3.amazonaws.com/${VER_MARKETPLACE}/files/main.sh
-chmod +x main.sh
+echo ">>> Caching install scripts"
+install --mode=755 /tmp/chef_server_setup.sh ./main.sh
+rm -f /tmp/chef_server_setup.sh
 
 echo ">>> Downloading and caching packages"
 curl -s -OL "$URL_CHEFSERVER"

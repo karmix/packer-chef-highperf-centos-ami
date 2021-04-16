@@ -74,6 +74,11 @@
   ],
   "provisioners": [
     {
+      "type": "file",
+      "source": "files/chef_server_setup.sh",
+      "destination": "/tmp/chef_server_setup.sh"
+    },
+    {
       "type": "shell",
       "execute_command": "echo 'packer' | sudo -S env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
