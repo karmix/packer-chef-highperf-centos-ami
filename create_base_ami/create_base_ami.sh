@@ -108,6 +108,19 @@ END
 
 yum --installroot="$ROOTFS" --nogpgcheck -y install kernel
 
+# TODO: Revert this workaround when RHEL 7 receives an updated
+# python-setuptools package, or these AMIs no longer use RHEL 7.
+#
+# `easy_install` shipped with RHEL 7 stopped working as a result of
+# https://github.com/pypa/pypi-support/issues/978 .  This ugly hack
+# installs the `python-setuptools` RPM (so `yum` doesn't try to install it
+# later with `cloud-init`), then uses `pip` to upgrade the module to a
+# working version (without RPM's knowledge).
+yum --installroot="$ROOTFS" --nogpgcheck -y install python-setuptools
+curl -sL 'https://files.pythonhosted.org/packages/27/79/8a850fe3496446ff0d584327ae44e7500daf6764ca1a382d2d02789accf7/pip-20.3.4-py2.py3-none-any.whl' -o "$ROOTFS/tmp/pip.whl"
+chroot "$ROOTFS" python /tmp/pip.whl/pip install --upgrade setuptools
+rm -f "$ROOTFS/tmp/pip.whl"
+
 chroot "$ROOTFS" grub2-mkconfig -o /boot/grub2/grub.cfg
 chroot "$ROOTFS" grub2-install "$DEVICE"
 chroot "$ROOTFS" yum --nogpgcheck -y install cloud-init cloud-utils-growpart
